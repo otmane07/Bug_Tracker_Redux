@@ -1,25 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
-
+import Store from "./store";
+import store from "./store";
+import * as actions from "./actionTypes"
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  // get the current State
+  // console.log(Store.getState())
+
+  // Subscribe to the Store
+  store.subscribe(()=>{
+    console.log("Store State",Store.getState())
+  })
+  // To setState we need dispatch [send] an action
+  // Add new Bug to our State
+  Store.dispatch({
+    type : actions.BUG_ADDED,
+    payload : {
+      description : "",
+    }
+  })
+
+  // Update Bug Status
+  Store.dispatch(
+      {
+        type : actions.BUG_UPDATE ,
+        payload : {
+          id : 1
+        }
+      }
+  )
+  // Remove a bug from our State
+  Store.dispatch({
+    type : actions.BUG_REMOVE ,
+    payload : {
+      id : 1 ,
+    }
+  })
+
+  return null
 }
 
 export default App;
