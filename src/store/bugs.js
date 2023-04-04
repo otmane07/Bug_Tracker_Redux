@@ -1,5 +1,11 @@
-import { v4 as uuidv4 } from 'uuid';
-import * as actions from "./actionTypes"
+// Actions Types
+import {v4 as uuidv4} from "uuid";
+
+export const BUG_ADDED = "ADD_BUG"
+export const BUG_REMOVE = "REMOVE_BUG"
+export const BUG_UPDATE = "UPDATE_BUG"
+
+// Reducer
 const initialState =  [
     {
         id : 1,
@@ -9,13 +15,13 @@ const initialState =  [
 ]
 export default function bugReducer (state = initialState , dispatcher) {
     switch (dispatcher.type){
-        case actions.BUG_ADDED :
+        case BUG_ADDED :
             return [...state , {id : uuidv4() , description: dispatcher.payload.description , solved: false }]
-        case actions.BUG_REMOVE :
+        case BUG_REMOVE :
             return state.filter(e => {
                 return e.id !== dispatcher.payload.id ;
             })
-        case actions.BUG_UPDATE :
+        case BUG_UPDATE :
             return state.map(e => {
                 return e.id !== dispatcher.payload.id ? e : {...e , solved : true};
             })

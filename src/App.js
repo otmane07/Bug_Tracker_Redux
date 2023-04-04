@@ -1,12 +1,11 @@
-import Store from "./store";
-import store from "./store";
-import * as actions from "./actionTypes"
+import Store from "./store/configureStore";
+import * as actions from "./store/bugs"
 function App() {
   // get the current State
   // console.log(Store.getState())
 
   // Subscribe to the Store
-  store.subscribe(()=>{
+  Store.subscribe(()=>{
     console.log("Store State",Store.getState())
   })
   // To setState we need dispatch [send] an action
