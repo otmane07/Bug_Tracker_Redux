@@ -1,7 +1,10 @@
 import {connect} from "react-redux";
+import * as actions from "./store/bugs"
 
 function App(props) {
-  console.log("state",props.myState)
+    console.log("state",props.myState)
+    //test the selector
+    console.log("Unresolved bug",actions.unresolvedBugsSelector(props.myState))
   //props.dispatch({type:"ADD_BUG",payload:{description : "test"}})
 
   return (

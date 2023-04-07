@@ -85,3 +85,9 @@ export default createReducer(initialState , {
 //
 // export const {ADD_BUG , REMOVE_BUG , UPDATE_BUG  } = bugsSlice.actions
 // export default bugsSlice.reducer ;
+
+// Selectors
+export const unresolvedBugsSelector = (state) => {
+    return state.filter(bug => bug.solved === false)
+}
+// return state.filter(bug => bug.solved === false) eq return state.filter(bug => !bug.solved )
