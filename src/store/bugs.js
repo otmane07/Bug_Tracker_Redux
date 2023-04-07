@@ -2,7 +2,7 @@
 import {v4 as uuidv4} from "uuid";
 import {createAction} from "@reduxjs/toolkit";
 import {createReducer} from "@reduxjs/toolkit";
-import {createSlice} from "@reduxjs/toolkit";
+// import {createSlice} from "@reduxjs/toolkit";
 
 // console.log("addBug",addBug) // Is a function
 // console.log("addBug()",addBug()) // when we call it => return an action {type: 'ADD_BUG', payload: undefined}
@@ -15,9 +15,9 @@ import {createSlice} from "@reduxjs/toolkit";
 // export const BUG_UPDATE = "UPDATE_BUG"
 
 // define  actions +  actions creator
-export const addBug = createAction("ADD_BUG")
-export const  removeBug = createAction("REMOVE_BUG")
-export const updateBug = createAction("UPDATE_BUG")
+// export const addBug = createAction("ADD_BUG")
+// export const  removeBug = createAction("REMOVE_BUG")
+// export const updateBug = createAction("UPDATE_BUG")
 
 
 
@@ -45,40 +45,43 @@ const initialState =  [
 //     return state
 // }
 
-// Creating a reducer using Toolkit
-// export default createReducer(initialState , {
-//     ADD_BUG : function (state ,dispatcher){
-//         state.push({id : uuidv4() , description: dispatcher.payload.description , solved: false })
-//     } ,
-//     REMOVE_BUG : function (state, dispatcher){
-//         let indexElementToRemove = state.findIndex((e)=> e.id === dispatcher.payload.id)
-//         state.splice(indexElementToRemove,indexElementToRemove+1)
-//     },
-//     UPDATE_BUG : function (state ,dispatcher){
-//         let indexElementToUpdate = state.findIndex((e)=> e.id === dispatcher.payload.id)
-//         state[indexElementToUpdate].solved = true ;
-//     }
-// })
-
-// Refactor creatReducer and createAction with createSlice
-const bugsSlice = createSlice({
-    name : "bugs",
-    initialState : initialState,
-    reducers : {
-        ADD_BUG : function (state ,dispatcher){
-            state.push({id : uuidv4() , description: dispatcher.payload.description , solved: false })
-        } ,
-        REMOVE_BUG : function (state, dispatcher){
-            let indexElementToRemove = state.findIndex((e)=> e.id === dispatcher.payload.id)
-            state.splice(indexElementToRemove,indexElementToRemove+1)
-        },
-        UPDATE_BUG : function (state ,dispatcher){
-            let indexElementToUpdate = state.findIndex((e)=> e.id === dispatcher.payload.id)
-            state[indexElementToUpdate].solved = true ;
-        }
+//Creating a reducer using Toolkit
+export default createReducer(initialState , {
+    ADD_BUG : function (state ,dispatcher){
+        state.push({id : uuidv4() , description: dispatcher.payload.description , solved: false })
+    } ,
+    REMOVE_BUG : function (state, dispatcher){
+        let indexElementToRemove = state.findIndex((e)=> e.id === dispatcher.payload.id)
+        state.splice(indexElementToRemove,indexElementToRemove+1)
+    },
+    UPDATE_BUG : function (state ,dispatcher){
+        let indexElementToUpdate = state.findIndex((e)=> e.id === dispatcher.payload.id)
+        state[indexElementToUpdate].solved = true ;
     }
 })
-console.log("bugsSlice",bugsSlice)
 
-export const {ADD_BUG , REMOVE_BUG , UPDATE_BUG  } = bugsSlice.actions
-export default bugsSlice.reducer ;
+// Refactor creatReducer and createAction with createSlice
+
+// const bugsSlice = createSlice({
+//     name : "bugs",
+//     initialState : initialState,
+//     reducers : {
+//         ADD_BUG : function (state ,dispatcher){
+//             console.log("dispatcher add",dispatcher)
+//             state.push({id : uuidv4() , description: dispatcher.payload.description , solved: false })
+//         } ,
+//         REMOVE_BUG : function (state, dispatcher){
+//             let indexElementToRemove = state.findIndex((e)=> e.id === dispatcher.payload.id)
+//             state.splice(indexElementToRemove,indexElementToRemove+1)
+//         },
+//         UPDATE_BUG : function (state ,dispatcher){
+//             let indexElementToUpdate = state.findIndex((e)=> e.id === dispatcher.payload.id)
+//             state[indexElementToUpdate].solved = true ;
+//         }
+//     }
+// })
+//
+// console.log("bugsSlice",bugsSlice)
+//
+// export const {ADD_BUG , REMOVE_BUG , UPDATE_BUG  } = bugsSlice.actions
+// export default bugsSlice.reducer ;
