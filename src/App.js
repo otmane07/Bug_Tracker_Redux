@@ -3,9 +3,16 @@ import * as actions from "./store/bugs"
 
 function App(props) {
     console.log("state",props.myState)
-    //test the selector
-    console.log("Unresolved bug",actions.unresolvedBugsSelector(props.myState))
-  //props.dispatch({type:"ADD_BUG",payload:{description : "test"}})
+    //props.dispatch({type:"ADD_BUG",payload:{description : "test"}})
+
+    let x =actions.unresolvedBugsSelector(props.myState) ;
+    let y = actions.unresolvedBugsSelector(props.myState) ;
+    console.log("compare x to y" , x === y )
+
+    // Selector using Reselect
+    let a = actions.unresolvedBugsSelectorUsingReselect(props.myState)
+    let b = actions.unresolvedBugsSelectorUsingReselect(props.myState)
+    console.log("compare a et b ",a === b)
 
   return (
       <>

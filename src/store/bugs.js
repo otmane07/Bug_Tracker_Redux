@@ -3,6 +3,7 @@ import {v4 as uuidv4} from "uuid";
 import {createAction} from "@reduxjs/toolkit";
 import {createReducer} from "@reduxjs/toolkit";
 // import {createSlice} from "@reduxjs/toolkit";
+import {createSelector} from "reselect";
 
 // console.log("addBug",addBug) // Is a function
 // console.log("addBug()",addBug()) // when we call it => return an action {type: 'ADD_BUG', payload: undefined}
@@ -91,3 +92,9 @@ export const unresolvedBugsSelector = (state) => {
     return state.filter(bug => bug.solved === false)
 }
 // return state.filter(bug => bug.solved === false) eq return state.filter(bug => !bug.solved )
+
+// bugs prend comme valeur state
+export const unresolvedBugsSelectorUsingReselect = createSelector(
+    state => state ,
+    bugs => bugs.filter(bug => !bug.solved)
+)
