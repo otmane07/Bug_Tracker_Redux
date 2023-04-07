@@ -10,8 +10,8 @@
 // creating the store using toolkit function
 
 import {configureStore} from "@reduxjs/toolkit";
-import bugReducer from "./bugs"
+import rootReducer from "./reducer"
 
-const configureAppStore = configureStore({reducer : bugReducer})
+const configureAppStore = configureStore({reducer : rootReducer})
 
 export default configureAppStore ;

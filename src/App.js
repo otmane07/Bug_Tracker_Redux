@@ -20,19 +20,24 @@ function App(props) {
         <button onClick={() => {
             props.dispatch({type:"ADD_BUG",payload:{description : "test"}})
         }
-        }> ADD </button>
+        }> ADD BUG</button>
         <button onClick={()=>{
             props.dispatch({type:"UPDATE_BUG",payload:{id:1}})
         }
         }>
-          Update
+          Update BUG
         </button>
         <button onClick={()=>{
             props.dispatch({type:"REMOVE_BUG",payload:{id:1}})
         }}>
-            Delete
+            Delete BUG
         </button>
+          <h1>User Section </h1>
+          <button onClick={()=>{
+              props.dispatch({type:"ADD_USER",payload:{name:"Hamza"}})
+          }}>ADD USER</button>
       </>
+
   )
 }
 function mapStateToProps(state) {

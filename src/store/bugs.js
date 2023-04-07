@@ -89,12 +89,12 @@ export default createReducer(initialState , {
 
 // Selectors
 export const unresolvedBugsSelector = (state) => {
-    return state.filter(bug => bug.solved === false)
+    return state.bugs.filter(bug => bug.solved === false)
 }
 // return state.filter(bug => bug.solved === false) eq return state.filter(bug => !bug.solved )
 
 // bugs prend comme valeur state
 export const unresolvedBugsSelectorUsingReselect = createSelector(
-    state => state ,
+    state => state.bugs ,
     bugs => bugs.filter(bug => !bug.solved)
 )
