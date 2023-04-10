@@ -27,6 +27,13 @@ const initialState =  [
     {
         id : 1,
         description : "Description du bug",
+        userId: 10 ,
+        solved : false
+    },
+    {
+        id : 2,
+        description : "Description du bug",
+        userId: 5 ,
         solved : false
     }
 ]
@@ -49,7 +56,7 @@ const initialState =  [
 //Creating a reducer using Toolkit
 export default createReducer(initialState , {
     ADD_BUG : function (state ,dispatcher){
-        state.push({id : uuidv4() , description: dispatcher.payload.description , solved: false })
+        state.push({id : uuidv4() , description: dispatcher.payload.description ,userId: 1 , solved: false })
     } ,
     REMOVE_BUG : function (state, dispatcher){
         let indexElementToRemove = state.findIndex((e)=> e.id === dispatcher.payload.id)
@@ -58,6 +65,10 @@ export default createReducer(initialState , {
     UPDATE_BUG : function (state ,dispatcher){
         let indexElementToUpdate = state.findIndex((e)=> e.id === dispatcher.payload.id)
         state[indexElementToUpdate].solved = true ;
+    },
+    ASSIGN_BUG : function (state,dispatcher){
+        let indexElementToUpdate = state.findIndex((e)=> e.id === dispatcher.payload.id)
+        state[indexElementToUpdate].userId = dispatcher.payload.userId ;
     }
 })
 

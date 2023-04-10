@@ -32,6 +32,11 @@ function App(props) {
         }}>
             Delete BUG
         </button>
+          <button onClick={()=>{
+              props.dispatch({type:"ASSIGN_BUG",payload:{id:1 , userId:1}})
+          }}>
+              Assign BUG
+          </button>
           <h1>User Section </h1>
           <button onClick={()=>{
               props.dispatch({type:"ADD_USER",payload:{name:"Hamza"}})
