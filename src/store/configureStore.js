@@ -16,7 +16,7 @@ import logger from "../middleware/logger"
 const configureAppStore = configureStore(
     {
             reducer : rootReducer ,
-            middleware : [logger]
+            middleware : [logger("console passed in param")]
          }
 )
 
