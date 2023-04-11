@@ -43,6 +43,14 @@ function App(props) {
           <button onClick={()=>{
               props.dispatch({type:"ADD_USER",payload:{name:"Hamza"}})
           }}>ADD USER</button>
+          <button onClick={()=>{
+              props.dispatch(()=>{
+                  props.dispatch({type:"ADD_USER",payload:{name:"Hamza"}})
+              })
+          }}>Dispatch a function</button>
+          <button onClick={()=>{
+              props.dispatch({type:"ERROR",payload:{description:"Error Test"}})
+          }}>Dispatch Error</button>
       </>
 
   )

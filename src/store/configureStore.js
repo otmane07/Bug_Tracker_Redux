@@ -9,14 +9,15 @@
 
 // creating the store using toolkit function
 
-import {configureStore} from "@reduxjs/toolkit";
+import {configureStore , getDefaultMiddleware} from "@reduxjs/toolkit";
 import rootReducer from "./reducer"
 import logger from "../middleware/logger"
+import error from "../middleware/error";
 
 const configureAppStore = configureStore(
     {
             reducer : rootReducer ,
-            middleware : [logger("console passed in param")]
+            middleware : [...getDefaultMiddleware(),logger("console passed in param"),error]
          }
 )
 
