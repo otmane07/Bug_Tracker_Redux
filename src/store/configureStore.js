@@ -11,7 +11,13 @@
 
 import {configureStore} from "@reduxjs/toolkit";
 import rootReducer from "./reducer"
+import logger from "../middleware/logger"
 
-const configureAppStore = configureStore({reducer : rootReducer})
+const configureAppStore = configureStore(
+    {
+            reducer : rootReducer ,
+            middleware : [logger]
+         }
+)
 
 export default configureAppStore ;

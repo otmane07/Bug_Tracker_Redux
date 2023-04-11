@@ -104,8 +104,17 @@ export const unresolvedBugsSelector = (state) => {
 }
 // return state.filter(bug => bug.solved === false) eq return state.filter(bug => !bug.solved )
 
-// bugs prend comme valeur state
+// bugs take as value state.bugs
 export const unresolvedBugsSelectorUsingReselect = createSelector(
     state => state.bugs ,
     bugs => bugs.filter(bug => !bug.solved)
 )
+// selector for getting bug’s by user
+export const getBugsByUserSelector = userId =>  createSelector(
+    state => state.bugs ,
+    bugs => bugs.filter(bug => bug.userId === userId)
+)
+
+// if I call getBugsByUserSelector( 2 ) it will return the function definition of our selector
+// const selector = getBugsByUserSelector( 2 )
+// selector( myState )

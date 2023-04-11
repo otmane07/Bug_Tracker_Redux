@@ -1,5 +1,6 @@
 import {connect} from "react-redux";
 import * as actions from "./store/bugs"
+import {getBugsByUserSelector} from "./store/bugs";
 
 function App(props) {
     console.log("state",props.myState)
@@ -14,6 +15,7 @@ function App(props) {
     let b = actions.unresolvedBugsSelectorUsingReselect(props.myState)
     console.log("compare a et b ",a === b)
 
+    console.log("selector" ,actions.getBugsByUserSelector(1)(props.myState) )
   return (
       <>
         <h1>State list length {props.myState.length}</h1>
