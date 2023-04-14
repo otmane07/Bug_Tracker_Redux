@@ -4,6 +4,7 @@ import {createAction} from "@reduxjs/toolkit";
 import {createReducer} from "@reduxjs/toolkit";
 // import {createSlice} from "@reduxjs/toolkit";
 import {createSelector} from "reselect";
+import {apiCallBegan} from "./api"
 
 // console.log("addBug",addBug) // Is a function
 // console.log("addBug()",addBug()) // when we call it => return an action {type: 'ADD_BUG', payload: undefined}
@@ -22,21 +23,26 @@ import {createSelector} from "reselect";
 
 
 
-// Reducer
-const initialState =  [
-    {
-        id : 1,
-        description : "Description du bug",
-        userId: 10 ,
-        solved : false
-    },
-    {
-        id : 2,
-        description : "Description du bug",
-        userId: 5 ,
-        solved : false
-    }
-]
+const initialState = {
+    list : [
+        {
+            id : 1,
+            description : "Description du bug",
+            userId: 10 ,
+            solved : false
+        },
+        {
+            id : 2,
+            description : "Description du bug",
+            userId: 5 ,
+            solved : false
+        }
+    ],
+    loading: false , // si on load data from the server
+    lastFetch : null //helpful for caching
+}
+//action creator
+
 // export default function bugReducer (state = initialState , dispatcher) {
 //     switch (dispatcher.type){
 //         case addBug.type :
@@ -56,19 +62,22 @@ const initialState =  [
 //Creating a reducer using Toolkit
 export default createReducer(initialState , {
     ADD_BUG : function (state ,dispatcher){
-        state.push({id : uuidv4() , description: dispatcher.payload.description ,userId: 1 , solved: false })
+        state.list.push({id : uuidv4() , description: dispatcher.payload.description ,userId: 1 , solved: false })
     } ,
     REMOVE_BUG : function (state, dispatcher){
-        let indexElementToRemove = state.findIndex((e)=> e.id === dispatcher.payload.id)
-        state.splice(indexElementToRemove,indexElementToRemove+1)
+        let indexElementToRemove = state.list.findIndex((e)=> e.id === dispatcher.payload.id)
+        state.list.splice(indexElementToRemove,indexElementToRemove+1)
     },
     UPDATE_BUG : function (state ,dispatcher){
-        let indexElementToUpdate = state.findIndex((e)=> e.id === dispatcher.payload.id)
-        state[indexElementToUpdate].solved = true ;
+        let indexElementToUpdate = state.list.findIndex((e)=> e.id === dispatcher.payload.id)
+        state.list[indexElementToUpdate].solved = true ;
     },
     ASSIGN_BUG : function (state,dispatcher){
-        let indexElementToUpdate = state.findIndex((e)=> e.id === dispatcher.payload.id)
-        state[indexElementToUpdate].userId = dispatcher.payload.userId ;
+        let indexElementToUpdate = state.list.findIndex((e)=> e.id === dispatcher.payload.id)
+        state.list[indexElementToUpdate].userId = dispatcher.payload.userId ;
+    },
+    RECEIVE_BUGS : function (state,dispatcher){
+        state.list = dispatcher.payload.data
     }
 })
 
@@ -100,18 +109,18 @@ export default createReducer(initialState , {
 
 // Selectors
 export const unresolvedBugsSelector = (state) => {
-    return state.bugs.filter(bug => bug.solved === false)
+    return state.bugs.list.filter(bug => bug.solved === false)
 }
 // return state.filter(bug => bug.solved === false) eq return state.filter(bug => !bug.solved )
 
 // bugs take as value state.bugs
 export const unresolvedBugsSelectorUsingReselect = createSelector(
-    state => state.bugs ,
+    state => state.bugs.list ,
     bugs => bugs.filter(bug => !bug.solved)
 )
 // selector for getting bug’s by user
 export const getBugsByUserSelector = userId =>  createSelector(
-    state => state.bugs ,
+    state => state.bugs.list ,
     bugs => bugs.filter(bug => bug.userId === userId)
 )
 

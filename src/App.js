@@ -51,6 +51,23 @@ function App(props) {
           <button onClick={()=>{
               props.dispatch({type:"ERROR",payload:{description:"Error Test"}})
           }}>Dispatch Error</button>
+          {/*dispatch Api call*/}
+          <button onClick={()=>{
+              props.dispatch(
+                  {
+                  type:"apiCallBegan",
+                  payload:{
+                      url : '/bugs',
+                      method : 'get', // default => i can delete it
+                      onSuccess : 'RECEIVE_BUGS',
+                      onError : 'ApiCallFailed'
+                    }
+                  })
+
+              // C'est pas bon de dispatcher l'action avec les information suivant [/bugs , 'RECEIVE_BUGS' ]
+              // dans UI Layer => il faut créer une action creatore dans bug slice pour faire la meme chose
+              // props.dispatch(loadBugs( ))
+          }}>Api Call</button>
       </>
 
   )

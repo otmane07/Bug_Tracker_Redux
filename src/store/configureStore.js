@@ -13,11 +13,12 @@ import {configureStore , getDefaultMiddleware} from "@reduxjs/toolkit";
 import rootReducer from "./reducer"
 import logger from "../middleware/logger"
 import error from "../middleware/error";
+import api from "../middleware/api"
 
 const configureAppStore = configureStore(
     {
             reducer : rootReducer ,
-            middleware : [...getDefaultMiddleware(),logger("console passed in param"),error]
+            middleware : [...getDefaultMiddleware(),logger("console passed in param"),error,api]
          }
 )
 
